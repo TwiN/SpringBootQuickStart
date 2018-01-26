@@ -17,13 +17,13 @@ public class UserController {
 	private UserService userService;
 	
 	
-	@PostMapping(value = "/login")
+	@PostMapping("/login")
 	public String login(@RequestParam String username, @RequestParam String password, HttpSession session) {
 		return userService.login(username, password, session);
 	}
 	
 	
-	@RequestMapping(value = "/logout", method = {RequestMethod.GET, RequestMethod.POST})
+	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "{}";
