@@ -23,6 +23,12 @@ public class UserController {
 	}
 	
 	
+	@PostMapping("/register")
+	public String register(@RequestParam String username, @RequestParam String password) {
+		return userService.register(username, password);
+	}
+	
+	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
