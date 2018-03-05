@@ -49,11 +49,9 @@ public class UserService {
 		if (username.length() < 4 || password.length() < 4) {
 			return Utils.jsonReply("ERROR", true, "MESSAGE", "Username/password must be at least 4 characters");
 		}
-		User user = new User(username, HashUtils.sha256WithRandomSalt(password), isAdmin);
-		userRepository.save(user);
+		userRepository.save(new User(username, HashUtils.sha256WithRandomSalt(password), isAdmin));
 		return Utils.jsonReply("ERROR", false, "MESSAGE", "Registered successfully");
 	}
-	
 	
 	
 	public String register(String username, String password) {
@@ -61,9 +59,6 @@ public class UserService {
 	}
 	
 	
-	/**
-	 * Checks if the user is connected (by looking through the user's session)
-	 */
 	public String checkIfUserLoggedIn(HttpSession session) {
 		if (session.getAttribute("USER") != null) {
 			User user = (User)session.getAttribute("USER");
